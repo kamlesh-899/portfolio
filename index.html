@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kamlesh Mali – React Developer</title>
+<meta name="description" content="Kamlesh Mali is a React and Node.js developer focused on frontend architecture, performance and accessibility.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#06070f;--panel:rgba(20,24,48,.62);--ink:#eaf0ff;--muted:#9aa5c8;--line:rgba(140,160,255,.2);
+  --a:#3de8ff;--b:#8a5cff;--c:#ff5cc8;--on:#04121a;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){
+  --bg:#f3f5ff;--panel:rgba(255,255,255,.75);--ink:#0c1030;--muted:#4a5278;--line:rgba(60,70,160,.2);
+  --a:#0a72d6;--b:#6a3df0;--c:#d0289a;--on:#ffffff;}}
+:root[data-theme="light"]{--bg:#f3f5ff;--panel:rgba(255,255,255,.75);--ink:#0c1030;--muted:#4a5278;--line:rgba(60,70,160,.2);--a:#0a72d6;--b:#6a3df0;--c:#d0289a;--on:#ffffff}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.05rem/1.65 "Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:hidden}
+a{color:var(--a);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--a);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;left:-999px;top:0;background:var(--a);color:var(--on);padding:.6rem 1rem;z-index:99}
+.skip:focus{left:1rem;top:1rem}
+/* ambient background */
+.bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.bg::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse at 50% 20%,#000 10%,transparent 70%);mask-image:radial-gradient(ellipse at 50% 20%,#000 10%,transparent 70%);opacity:.55}
+.glow{position:absolute;width:46vw;height:46vw;max-width:620px;max-height:620px;border-radius:50%;filter:blur(90px);opacity:.5;left:var(--x,60%);top:var(--y,10%);transform:translate(-50%,-50%);background:radial-gradient(circle,var(--b),transparent 65%);transition:left .6s ease-out,top .6s ease-out}
+.glow.two{left:15%;top:75%;opacity:.28;background:radial-gradient(circle,var(--a),transparent 65%);transition:none}
+.wrap{max-width:1040px;margin:0 auto;padding:0 1.25rem}
+h1,h2,h3{font-family:"Unbounded","Manrope",system-ui,sans-serif;margin:0;line-height:1.1}
+header.top{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 0}
+header.top strong{font-family:"Unbounded",sans-serif;font-weight:500;font-size:.95rem}
+header.top nav{display:flex;align-items:center;gap:1.2rem}
+header.top nav a{color:var(--muted);text-decoration:none;font-weight:500}
+header.top nav a:hover{color:var(--ink)}
+#theme{background:var(--panel);border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:.4rem .9rem;font:inherit;font-size:.9rem;cursor:pointer}
+.hero{padding:clamp(3rem,10vw,7rem) 0 3rem}
+.hero h1{font-size:clamp(2.6rem,9.5vw,6.2rem);font-weight:700;letter-spacing:-.04em;background:linear-gradient(100deg,var(--ink) 15%,var(--a) 55%,var(--b) 85%);-webkit-background-clip:text;background-clip:text;color:transparent;animation:rise 1s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(24px);filter:blur(10px)}to{opacity:1;transform:none;filter:none}}
+.role{font-size:clamp(1.15rem,3vw,1.6rem);font-weight:500;margin:1.4rem 0 .6rem}
+.lede{color:var(--muted);max-width:58ch;margin:0 0 2rem}
+.btns a{display:inline-block;padding:.8rem 1.4rem;border-radius:999px;font-weight:700;text-decoration:none;margin:0 .6rem .6rem 0}
+.p{background:linear-gradient(100deg,var(--a),var(--b));color:var(--on)}
+.s{border:1px solid var(--line);color:var(--ink);background:var(--panel)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin:1rem 0 4rem}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:1.2rem;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.stat b{display:block;font-family:"Unbounded",sans-serif;font-size:1.7rem;color:var(--a)}
+.stat span{color:var(--muted);font-size:.92rem}
+section{padding:1.5rem 0 2.5rem}
+section>h2{font-size:clamp(1.5rem,4vw,2.1rem);margin-bottom:1.5rem}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:1.5rem;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:border-color .25s,transform .25s}
+.card:hover{border-color:var(--a);transform:translateY(-3px)}
+.card.wide{grid-column:1/-1}
+.card h3{font-size:1.05rem;font-weight:500}
+.card .meta{color:var(--a);font-size:.92rem;font-weight:700;margin:.5rem 0 .8rem}
+.card ul{margin:0;padding-left:1.1rem;color:var(--muted)}
+.card li{margin:.35rem 0}
+.award{margin-top:.9rem;font-weight:700;color:var(--c)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.chips span{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:.3rem .85rem;font-size:.92rem}
+.group{margin-bottom:1.3rem}.group h3{font-size:.95rem;font-weight:500;margin-bottom:.6rem;color:var(--muted)}
+.list{margin:0;padding-left:1.1rem;color:var(--muted)}.list li{margin:.4rem 0}
+.contact p{color:var(--muted)}
+footer{border-top:1px solid var(--line);padding:2rem 0 3rem;color:var(--muted)}
+@media (max-width:760px){.stats{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}header.top nav a.h{display:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true"><div class="glow" id="glow"></div><div class="glow two"></div></div>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+<header class="top">
+  <strong>KM</strong>
+  <nav aria-label="Main"><a class="h" href="#experience">Experience</a><a class="h" href="#skills">Skills</a><a href="#contact">Contact</a><button id="theme" type="button" aria-label="Switch colour theme">Theme</button></nav>
+</header>
+<main id="main">
+<div class="hero">
+  <h1>Kamlesh Mali</h1>
+  <p class="role">React developer building fast, accessible products.</p>
+  <p class="lede">I have 3+ years of experience in full-stack web apps with React and Node.js. I focus on frontend architecture, performance and interfaces that work for everyone. Right now I'm a Software Engineer 2 at Seismic.</p>
+  <div class="btns"><a class="p" href="#contact">Get in touch</a><a class="s" href="https://linkedin.com/in/kamlesh-mali-b14bb51b1">LinkedIn</a></div>
+</div>
+<div class="stats">
+  <div class="stat"><b>95%</b><span>accessibility score, up from 65%</span></div>
+  <div class="stat"><b>10k+</b><span>users on my LinkedIn OAuth feature</span></div>
+  <div class="stat"><b>99.9%</b><span>API uptime, sub-200ms responses</span></div>
+  <div class="stat"><b>+40%</b><span>engagement from email templates</span></div>
+</div>
+
+<section id="experience">
+<h2>Experience</h2>
+<div class="grid">
+<article class="card wide">
+  <h3>Software Engineer 2, Seismic Software Systems</h3>
+  <div class="meta">Hyderabad · Oct 2025 – present</div>
+  <ul>
+    <li>Build React components for the LiveSocial platform, used by thousands of enterprise users.</li>
+    <li>Designed Node.js and Express REST APIs with 99.9% uptime and sub-200ms response times.</li>
+    <li>Improved React performance with code splitting, lazy loading and memoization.</li>
+    <li>Lead frontend architecture and the shared component library; run code reviews.</li>
+  </ul>
+</article>
+<article class="card">
+  <h3>Senior Software Engineer, Persistent Systems</h3>
+  <div class="meta">Pune · June 2024 – Oct 2025</div>
+  <ul>
+    <li>Raised the accessibility score of React apps from 65% to 95% through WCAG 2.0 work.</li>
+    <li>Built LinkedIn OAuth (React and Node.js) syncing professional data for 10,000+ users.</li>
+    <li>Built an email template system that lifted engagement by 40%.</li>
+    <li>Created a content feedback feature with custom hooks; mentored junior developers.</li>
+  </ul>
+  <div class="award">Bravo Award for technical delivery and innovation</div>
+</article>
+<article class="card">
+  <h3>Software Engineer, Persistent Systems</h3>
+  <div class="meta">Pune · June 2022 – June 2024</div>
+  <ul>
+    <li>Added video recording to a Learning Management System with the MediaRecorder API.</li>
+    <li>Fixed 50+ WCAG issues: keyboard navigation, ARIA labels, screen reader support.</li>
+    <li>Cut technical debt by 30% by streamlining feature flag removal.</li>
+    <li>Built a component library that reduced new-feature development time by 25%.</li>
+  </ul>
+  <div class="award">Bravo Award for technological innovation</div>
+</article>
+<article class="card wide">
+  <h3>Software Development Intern, SmartInternz</h3>
+  <div class="meta">Virtual · April – May 2021</div>
+  <ul><li>Built an AI chatbot with a React frontend and IBM Watson backend, using Watson Discovery for answers.</li></ul>
+</article>
+</div>
+</section>
+
+<section id="skills">
+<h2>Skills</h2>
+<div class="group"><h3>Frontend</h3><div class="chips"><span>React.js</span><span>TypeScript</span><span>JavaScript ES6+</span><span>Redux</span><span>Hooks</span><span>Context API</span><span>HTML5</span><span>CSS3</span><span>Webpack</span></div></div>
+<div class="group"><h3>Backend and data</h3><div class="chips"><span>Node.js</span><span>Express.js</span><span>REST APIs</span><span>GraphQL</span><span>MongoDB</span><span>PostgreSQL</span><span>SQL</span></div></div>
+<div class="group"><h3>Tools and practice</h3><div class="chips"><span>Git and GitHub</span><span>CI/CD</span><span>Jest</span><span>React Testing Library</span><span>Agile/Scrum</span><span>WCAG 2.0/2.1</span><span>Performance</span><span>Responsive design</span><span>Python</span><span>C</span></div></div>
+</section>
+
+<section id="recognition">
+<h2>Recognition and learning</h2>
+<ul class="list">
+  <li>Top Talent for FY2025, Persistent Systems</li>
+  <li>Bravo Award for Excellence, Persistent Systems (2024, 2025)</li>
+  <li>1st Prize, National Conference on Role of Engineers in Nation Building (2022)</li>
+  <li>Node.js Practitioner Level (CL-2), Persistent Systems</li>
+  <li>Google Data Analytics Professional Certificate, Coursera</li>
+  <li>Microsoft Azure Fundamentals (AZ-900)</li>
+  <li>Python Programming Fundamentals, University of Michigan (Coursera)</li>
+  <li>B.E. Computer Science, Viva Institute of Technology, 2022 (CGPA 8.66/10)</li>
+</ul>
+</section>
+
+<section id="contact" class="contact">
+<h2>Contact</h2>
+<p>I'm happy to talk about frontend work, accessibility or a role you're hiring for.</p>
+<p><a href="mailto:kamleshmali9730@gmail.com">kamleshmali9730@gmail.com</a><br><a href="https://linkedin.com/in/kamlesh-mali-b14bb51b1">linkedin.com/in/kamlesh-mali-b14bb51b1</a></p>
+</section>
+</main>
+<footer>© 2026 Kamlesh Mali</footer>
+</div>
+<script>
+(function(){
+  var r=document.documentElement,b=document.getElementById('theme'),k='theme';
+  try{var s=localStorage.getItem(k);if(s)r.setAttribute('data-theme',s)}catch(e){}
+  b.addEventListener('click',function(){
+    var cur=r.getAttribute('data-theme');
+    var light=cur==='light'||(!cur&&matchMedia('(prefers-color-scheme:light)').matches);
+    var n=light?'dark':'light';r.setAttribute('data-theme',n);
+    try{localStorage.setItem(k,n)}catch(e){}
+  });
+  var g=document.getElementById('glow');
+  if(g&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
+    addEventListener('pointermove',function(e){g.style.setProperty('--x',e.clientX+'px');g.style.setProperty('--y',e.clientY+'px')},{passive:true});
+  }
+})();
+</script>
+</body>
+</html>
